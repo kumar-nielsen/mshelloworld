@@ -2,5 +2,9 @@
   "name": "application-name",
   "version": "0.0.1",
   "appID": "4e06b924-eaec-4003-9a2a-86a66638f172",
-  "appPassword": "0CkyZ0oyCbvQbXtNOOe0MjL"
+  "appPassword": "0CkyZ0oyCbvQbXtNOOe0MjL",
+  "dependencies": {
+    "botbuilder": "^3.2.3",
+    "restify": "^4.1.1"
+  }
 }
