@@ -6,16 +6,11 @@ var restify = require('restify');
 //==============================================================================
 
 // Create chat bot
-// var connector = new builder.ChatConnector({
-//     appId: process.env.MICROSOFT_APP_ID,
-//     appPassword: process.env.MICROSOFT_APP_PASSWORD
-// });
-// var bot = new builder.UniversalBot(connector);
-
-var bot = new builder.BotConnectorBot({
+var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
+var bot = new builder.UniversalBot(connector);
 
 // USED FOR CONSOLE CONNECTOR
 // var connector = new builder.ConsoleConnector().listen();
@@ -78,7 +73,7 @@ server.post('/', function create (req, res, next) {
 });
 
 // Bot endpoint
-server.post('/api/messages', bot.listen());
+server.post('/api/messages', connector.listen());
 
 // Get Bot endpoint to start listening for Dialog requests
 server.listen(process.env.PORT || 3000, function () {
