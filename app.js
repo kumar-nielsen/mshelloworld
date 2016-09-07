@@ -67,7 +67,7 @@ var server = restify.createServer();
 server.use(restify.queryParser());
 
 // Bot endpoint
-server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
+server.post('/api/messages', bot.listen());
 
 // Get Bot endpoint to start listening for Dialog requests
 server.listen(process.env.PORT || 3000, function () {
