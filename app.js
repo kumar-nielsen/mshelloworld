@@ -5,24 +5,12 @@ var restify = require('restify');
 // Bot Setup
 //==============================================================================
 
-// Setup restify server
-var server = restify.createServer();
-server.listen(process.env.PORT || 3000, function () {
-    console.log('%s listening to %s', server.name, server.url);
-});
-
-// Query parser
-server.use(restify.queryParser());
-
 // Create chat bot
 var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
 var bot = new builder.UniversalBot(connector);
-
-// Bot endpoint
-server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
 
 // USED FOR CONSOLE CONNECTOR
 // var connector = new builder.ConsoleConnector().listen();
@@ -66,3 +54,22 @@ bot.dialog('/profile', [
         session.endDialog();
     }
 ]);
+
+//===========================================================================================
+// SERVER SETUP
+// Credit: http://fisheyefocus.com/fisheyeview/wp-content/uploads/2016/07/ms..bot_.demo_..js
+//===========================================================================================
+
+// Setup restify server
+var server = restify.createServer();
+
+// Query parser
+server.use(restify.queryParser());
+
+// Bot endpoint
+server.post('/api/messages', bot.verifyBotFramework(), bot.listen());
+
+// Get Bot endpoint to start listening for Dialog requests
+server.listen(process.env.PORT || 3000, function () {
+    console.log('%s listening to %s', server.name, server.url);
+});
