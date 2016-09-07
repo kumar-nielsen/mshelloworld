@@ -66,6 +66,12 @@ var server = restify.createServer();
 // Query parser
 server.use(restify.queryParser());
 
+// Main landing page
+server.post('/', function create (req, res, next) {
+    res.send(201, "Hello, welcome to fbot.");
+    return next();
+});
+
 // Bot endpoint
 server.post('/api/messages', bot.listen());
 
